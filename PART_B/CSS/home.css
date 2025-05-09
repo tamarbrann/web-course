@@ -15,6 +15,11 @@
     background-color: var(--background-color);
     color: var(--text-color);
   }
+
+  .body-container {
+    padding-block: 10px;
+
+  }
   
   /* עיצוב כותרת ראשית */
   header {
