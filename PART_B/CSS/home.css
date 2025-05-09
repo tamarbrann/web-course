@@ -10,7 +10,7 @@
   /* עיצוב כללי */
   body {
     margin: 0;
-    padding: 0;
+    padding-inline: 0;
     font-family: var(--font-family);
     background-color: var(--background-color);
     color: var(--text-color);
