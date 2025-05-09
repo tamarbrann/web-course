@@ -24,90 +24,86 @@
     </div>
   </header>
 
+  <div class="body-container">
+    <h2>Our Products</h2>
 
-  <h2>Our Products</h2>
+    <!-- Filters -->
+    <form>
+      <label for="size">Size:</label>
+      <select id="size" name="size">
+        <option value="">All Sizes</option>
+        <option value="0-3">0-3 Months</option>
+        <option value="3-6">3-6 Months</option>
+        <option value="6-12">6-12 Months</option>
+      </select>
 
-  <!-- Filters -->
-  <form>
-    <label for="size">Size:</label>
-    <select id="size" name="size">
-      <option value="">All Sizes</option>
-      <option value="0-3">0-3 Months</option>
-      <option value="3-6">3-6 Months</option>
-      <option value="6-12">6-12 Months</option>
-    </select>
+      <label for="color">Color:</label>
+      <select id="color" name="color">
+        <option value="">All Colors</option>
+        <option value="blue">Blue</option>
+        <option value="pink">Pink</option>
+        <option value="green">Green</option>
+      </select>
 
-    <label for="color">Color:</label>
-    <select id="color" name="color">
-      <option value="">All Colors</option>
-      <option value="blue">Blue</option>
-      <option value="pink">Pink</option>
-      <option value="green">Green</option>
-    </select>
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender">
+        <option value="">All</option>
+        <option value="boys">Boys</option>
+        <option value="girls">Girls</option>
+      </select>
 
-    <label for="gender">Gender:</label>
-    <select id="gender" name="gender">
-      <option value="">All</option>
-      <option value="boys">Boys</option>
-      <option value="girls">Girls</option>
-    </select>
+      <label for="type">Type:</label>
+      <select id="type" name="type">
+        <option value="">All Types</option>
+        <option value="overalls">Overalls</option>
+        <option value="shirts">Shirts</option>
+        <option value="pants">Pants</option>
+        <option value="skirts">Skirts</option>
+        <option value="dresses">Dresses</option>
+      </select>
 
-    <label for="type">Type:</label>
-    <select id="type" name="type">
-      <option value="">All Types</option>
-      <option value="overalls">Overalls</option>
-      <option value="shirts">Shirts</option>
-      <option value="pants">Pants</option>
-      <option value="skirts">Skirts</option>
-      <option value="dresses">Dresses</option>
-    </select>
+      <label for="condition">Condition:</label>
+      <select id="condition" name="condition">
+        <option value="">All</option>
+        <option value="first-hand">First Hand</option>
+        <option value="second-hand">Second Hand</option>
+      </select><br><br>
+    </form>
 
-    <label for="condition">Condition:</label>
-    <select id="condition" name="condition">
-      <option value="">All</option>
-      <option value="first-hand">First Hand</option>
-      <option value="second-hand">Second Hand</option>
-    </select><br><br>
-  </form>
+    <!-- Sorting -->
+    <p>Sort by:</p>
 
-  <!-- Sorting -->
-  <p>Sort by:</p>
+    <!-- Breadcrumb -->
+    <p>מיקום בדפים</p>
 
-  <!-- Breadcrumb -->
-  <p>מיקום בדפים</p>
-
-  <!-- Product List -->
-  <div>
+    <!-- Product List -->
     <div>
-      <img src="picture/overalls.png" alt="Product 1" width="150">
-      <h3>Blue Baby Overalls</h3>
-      <p>Organic cotton, second hand, excellent condition.</p>
-      <p>Price: $10</p>
-      <button>Add to Cart</button>
+      <div>
+        <img src="picture/overalls.png" alt="Product 1" width="150">
+        <h3>Blue Baby Overalls</h3>
+        <p>Organic cotton, second hand, excellent condition.</p>
+        <p>Price: $10</p>
+        <button>Add to Cart</button>
+      </div>
+
+      <div>
+        <img src="picture/dress.png" alt="Product 2" width="150">
+        <h3>Baby Dress</h3>
+        <p>Eco-friendly materials, first hand.</p>
+        <p>Price: $15</p>
+        <button>Add to Cart</button>
+      </div>
+
+
+
+      <!-- Quantity of Items -->
+      <p>Showing 10 products in this category.</p>
+
+      <!--Links to the Terms of Service and Privacy Policy-->
+      <a href="PrivacyPolicy.html">Privacy Policy</a> <a href="TermsOfService.html">Terms of Service</a>
     </div>
-
-    <div>
-      <img src="picture/dress.png" alt="Product 2" width="150">
-      <h3>Baby Dress</h3>
-      <p>Eco-friendly materials, first hand.</p>
-      <p>Price: $15</p>
-      <button>Add to Cart</button>
-    </div>
-
-
-
-    <!-- Quantity of Items -->
-    <p>Showing 10 products in this category.</p>
-
-
-    <p>
-
-    </p>
-    <!--Links to the Terms of Service and Privacy Policy-->
-    <a href="PrivacyPolicy.html">Privacy Policy</a> <a href="TermsOfService.html">Terms of Service</a>
-    <p>
-
-    <footer>&copy; Group 10 WEB course</footer>
+  </div>
+  <footer>&copy; Group 10 WEB course</footer>
 </body>
 
 </html>
