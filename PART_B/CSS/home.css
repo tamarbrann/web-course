@@ -153,7 +153,9 @@
     animation: fadeInSlide 1s forwards;
   }
   
-      
+  .categories a {
+    text-decoration: none;
+  }    
   
   
   
