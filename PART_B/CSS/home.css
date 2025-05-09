@@ -31,13 +31,16 @@
     text-align: center;
   }
   
-  /* מרכז תמונה גדולה */
+  /* מרכז תמונה גדולה
   header + * img {
     display: block;
     margin: 0 auto;
   }
-  
-  
+   */
+  .main-image {
+    max-width:  100%;
+  }
+
  /*  עיצוב לקטגוריות ניווט */
 .navigation a:link,
 .navigation a:visited {
