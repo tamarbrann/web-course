@@ -18,7 +18,8 @@
 
   .body-container {
     padding-block: 10px;
-
+    max-width: 800px;
+    margin: auto;
   }
   
   /* עיצוב כותרת ראשית */
