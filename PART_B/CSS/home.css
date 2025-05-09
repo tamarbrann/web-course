@@ -1,76 +1,85 @@
-/* הגדרת משתנים גלובליים */
+/* Defining global variables */
 :root {
-    --primary-color: #CFE1B9;
-    --accent-color: #E8D8C4;
-    --background-color: #D4E5F4;
-    --text-color: #2C3E50;
-    --font-family: 'Winky Sans', sans-serif;
-  }
-  
-  /* עיצוב כללי */
-  body {
-    margin: 0;
-    padding-inline: 0;
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
+  --primary-color: #CFE1B9;
+  --accent-color: #E8D8C4;
+  --background-color: #D4E5F4;
+  --text-color: #2C3E50;
+  --font-family: 'Winky Sans', sans-serif;
+}
 
-  .body-container {
-    padding-block: 10px;
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  /* עיצוב כותרת ראשית */
-  header {
-    background-color: var(--primary-color);
-    padding: 20px;
-    display: flex; /*הלוגו יהיה בצד שמאל והקטגוריות בצד ימין*/
-    justify-content: space-between;
-    align-items: center;/*ממרכז את הפריטים לגובה*/
-  }
+/* General design */
+body {
+  margin: 0;
+  padding-inline: 0;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 
-  
-  /* מרכז את כל מה שמגיע אחרי ההדר */
-  header + * {
-    text-align: center;
-  }
-  
-  /* מרכז תמונה גדולה
+.body-container {
+  padding-block: 10px;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Header design */
+header {
+  background-color: var(--primary-color);
+  padding: 20px;
+  display: flex;
+  /*The logo will be on the left and the categories on the right*/
+  justify-content: space-between;
+  align-items: center;
+  /*Centers the items vertically*/
+}
+
+
+/* Center everything that comes after the header */
+header+* {
+  text-align: center;
+}
+
+/* מרכז תמונה גדולה
   header + * img {
     display: block;
     margin: 0 auto;
   }
    */
-  .main-image {
-    max-width:  100%;
-  }
+.main-image {
+  max-width: 100%;
+}
 
- /*  עיצוב לקטגוריות ניווט */
+/* Design for navigation categories */
 .navigation a:link,
 .navigation a:visited {
-  display: inline-block; /* כדי לאפשר padding ו-transform */
+  display: inline-block;
+  /* To enable padding and transform */
   padding: 10px 20px;
   margin: 0 10px;
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
-  color: var(--text-color); /* צבע טקסט שהגדרת ב-root */
-  background-color: var(--primary-color); /* צבע רקע לכפתור */
-  border-radius: 8px; /* פינות מעוגלות */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* מעבר חלק */
+  color: var(--text-color);
+  /* Text color you set in root */
+  background-color: var(--primary-color);
+  /* Background color for the button */
+  border-radius: 8px;
+  /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Smooth transition */
 }
 
 .navigation a:hover {
-  background-color: var(--accent-color); /* שינוי צבע רקע */
-  color: var(--text-color); /* נשאר אותו צבע טקסט */
-  transform: scale(1.1); /* הגדלה */
+  background-color: var(--accent-color);
+  /* Change background color */
+  color: var(--text-color);
+  /* Text color remains the same */
+  transform: scale(1.1);
+  /* Zoom in */
 }
 
 
-/* כפתור עבור הלינק Discover Our Collection */
-
+/* Button for the Discover Our Collection link */
 .discover-button:link,
 .discover-button:visited {
   display: inline-block;
@@ -80,89 +89,93 @@
   font-weight: bold;
   color: var(--text-color);
   text-decoration: none;
-  background-color: var(--primary-color); /* צבע רקע ירוק כברירת מחדל */
-  border: 2px solid var(--primary-color); /* מסגרת באותו צבע ירוק */
+  background-color: var(--primary-color);
+  /* Default background color is green */
+  border: 2px solid var(--primary-color);
+  /* Frame in the same green color */
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .discover-button:hover {
-  background-color: var(--accent-color); /* בריחוף - הרקע משתנה לצבע אחר */
+  background-color: var(--accent-color);
+  /*  hover - the background changes to a different color */
   color: var(--text-color);
   transform: scale(1.1);
 }
 
-/* עיצוב לוגו של הרשתות */
-  .social-links a {
-    display: inline-flex; /*יישור של האייקונים במרכז*/
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-    background-color: var(--accent-color); /* הכתום שלך */
-    border-radius: 50%; /* עיגול */
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    color: var(--text-color); /* צבע האייקון */
-  }
-  
-  .social-links a:hover {
-    background-color: var(--primary-color); /* כשהעכבר עובר, הרקע משתנה */
-    transform: scale(1.1); /* הגדלה עדינה */
-  }
-  
-  .social-links i {
-    font-size: 24px; /* גודל האייקון עצמו */
-  }
-  
-  /*עיצוב לינקים*/
-  .footer-link:link,
-  .footer-link:visited {
-    display: inline-block;
-    margin: 0 5px;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--text-color);
-    text-decoration: underline; 
-    transition: color 0.3s ease;
-  }
-  
-  .footer-link:hover {
-    color: var(--accent-color); 
-  }
+/* Network logo design */
+.social-links a {
+  display: inline-flex;
+  /*Align the icons in the center*/
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: var(--text-color);
+  /* Icon color */
+}
 
-  footer {
-    background-color: var(--primary-color);
-    text-align: center;
-    padding: 15px;
-    font-size: 0.9em;
-  }
+.social-links a:hover {
+  background-color: var(--primary-color);
+  /* When the mouse moves, the background changes */
+  transform: scale(1.1);
+}
 
-  
-  /*  עיצוב ואנימציה של הקטגוריות בגדים*/
-  @keyframes fadeInSlide {
-    0% {
-      opacity: 0;
-      transform: translateX(100px); /*תזוזה 100 פיקסלים ימינה מהעמדה הרגילה שלה*/
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  .categories img {
-    display: inline-block;
-    margin: 10px;
-    width: 150px;
+.social-links i {
+  font-size: 24px;
+}
+
+/*Link design*/
+.footer-link:link,
+.footer-link:visited {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent-color);
+}
+
+footer {
+  background-color: var(--primary-color);
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+}
+
+
+/* Design and animation of the clothing categories*/
+@keyframes fadeInSlide {
+  0% {
     opacity: 0;
-    animation: fadeInSlide 1s forwards;
+    transform: translateX(100px);
   }
-  
-  .categories a {
-    text-decoration: none;
-  }    
-  
-  
-  
-  
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.categories img {
+  display: inline-block;
+  margin: 10px;
+  width: 150px;
+  opacity: 0;
+  animation: fadeInSlide 1s forwards;
+}
+
+.categories a {
+  text-decoration: none;
+}
