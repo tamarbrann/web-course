@@ -53,7 +53,13 @@ const colorPicker = document.getElementById("color");
 colorPicker.addEventListener("change", (e) => {
   const color = e.target.value;
   if (color) {
-    showProducts(allProducts.filter((p) => p.color === color));
+    const filterd = [];
+    for (const p of allProducts) {
+      if (p.color === color) {
+        filterd.push(p);
+      }
+    }
+    showProducts(filterd);
   } else {
     showProducts(allProducts);
   }
