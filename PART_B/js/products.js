@@ -1,5 +1,7 @@
 function showProducts(products) {
   const container = document.getElementById("products");
+  container.innerHTML = undefined;
+
   for (const product of products) {
     const div = document.createElement("div");
 
@@ -46,3 +48,13 @@ const allProducts = [
 ];
 
 showProducts(allProducts);
+
+const colorPicker = document.getElementById("color");
+colorPicker.addEventListener("change", (e) => {
+  const color = e.target.value;
+  if (color) {
+    showProducts(allProducts.filter((p) => p.color === color));
+  } else {
+    showProducts(allProducts);
+  }
+});
