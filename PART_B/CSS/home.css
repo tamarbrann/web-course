@@ -190,3 +190,19 @@ footer {
 .categories a {
   text-decoration: none;
 }
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .input-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+}
+
+.terms-conditions {
+  align-self: center;
+}
