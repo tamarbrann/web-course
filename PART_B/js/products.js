@@ -40,6 +40,7 @@ const allProducts = [
     size: "0-3",
     gender: "boys",
     type: "overalls",
+    condition: "first-hand",
   },
   {
     title: "Baby Dress",
@@ -50,6 +51,7 @@ const allProducts = [
     size: "6-12",
     gender: "girls",
     type: "dresses",
+    condition: "second-hand",
   },
 ];
 
@@ -110,6 +112,22 @@ typePicker.addEventListener("change", (e) => {
     const filterd = [];
     for (const p of allProducts) {
       if (p.type === type) {
+        filterd.push(p);
+      }
+    }
+    showProducts(filterd);
+  } else {
+    showProducts(allProducts);
+  }
+});
+
+const conditionPicker = document.getElementById("condition");
+conditionPicker.addEventListener("change", (e) => {
+  const condition = e.target.value;
+  if (condition) {
+    const filterd = [];
+    for (const p of allProducts) {
+      if (p.condition === condition) {
         filterd.push(p);
       }
     }
