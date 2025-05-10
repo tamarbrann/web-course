@@ -1,6 +1,6 @@
 function showProducts(products) {
   const container = document.getElementById("products");
-  container.innerHTML = undefined;
+  container.innerHTML = "";
 
   for (const product of products) {
     const div = document.createElement("div");
@@ -27,6 +27,15 @@ function showProducts(products) {
     div.appendChild(button);
 
     container.appendChild(div);
+  }
+}
+
+function resetOtherFilters(el) {
+  const selects = document.getElementsByTagName("select");
+  for (const select of selects) {
+    if (el !== select) {
+      select.value = "";
+    }
   }
 }
 
@@ -59,6 +68,7 @@ showProducts(allProducts);
 
 const colorPicker = document.getElementById("color");
 colorPicker.addEventListener("change", (e) => {
+  resetOtherFilters(e.target);
   const color = e.target.value;
   if (color) {
     const filterd = [];
@@ -75,6 +85,7 @@ colorPicker.addEventListener("change", (e) => {
 
 const sizePicker = document.getElementById("size");
 sizePicker.addEventListener("change", (e) => {
+  resetOtherFilters(e.target);
   const size = e.target.value;
   if (size) {
     const filterd = [];
@@ -91,6 +102,7 @@ sizePicker.addEventListener("change", (e) => {
 
 const genderPicker = document.getElementById("gender");
 genderPicker.addEventListener("change", (e) => {
+  resetOtherFilters(e.target);
   const gender = e.target.value;
   if (gender) {
     const filterd = [];
@@ -107,6 +119,7 @@ genderPicker.addEventListener("change", (e) => {
 
 const typePicker = document.getElementById("type");
 typePicker.addEventListener("change", (e) => {
+  resetOtherFilters(e.target);
   const type = e.target.value;
   if (type) {
     const filterd = [];
@@ -123,6 +136,7 @@ typePicker.addEventListener("change", (e) => {
 
 const conditionPicker = document.getElementById("condition");
 conditionPicker.addEventListener("change", (e) => {
+  resetOtherFilters(e.target);
   const condition = e.target.value;
   if (condition) {
     const filterd = [];
