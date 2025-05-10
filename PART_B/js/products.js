@@ -39,6 +39,7 @@ const allProducts = [
     color: "blue",
     size: "0-3",
     gender: "boys",
+    type: "overalls",
   },
   {
     title: "Baby Dress",
@@ -48,6 +49,7 @@ const allProducts = [
     color: "green",
     size: "6-12",
     gender: "girls",
+    type: "dresses",
   },
 ];
 
@@ -92,6 +94,22 @@ genderPicker.addEventListener("change", (e) => {
     const filterd = [];
     for (const p of allProducts) {
       if (p.gender === gender) {
+        filterd.push(p);
+      }
+    }
+    showProducts(filterd);
+  } else {
+    showProducts(allProducts);
+  }
+});
+
+const typePicker = document.getElementById("type");
+typePicker.addEventListener("change", (e) => {
+  const type = e.target.value;
+  if (type) {
+    const filterd = [];
+    for (const p of allProducts) {
+      if (p.type === type) {
         filterd.push(p);
       }
     }
