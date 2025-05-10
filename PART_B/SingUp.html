@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:wght@300&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/singup.js" defer></script>
   <title>New Era</title>
 </head>
 
@@ -27,42 +28,42 @@
   <div class="body-container">
     <h2>Register forms</h2>
 
-    <form class="signup-form" action="Profil.html" method="GET" enctype="multipart/form-data">
+    <form id="signup-form" class="signup-form" action="Profil.html" method="GET" enctype="multipart/form-data">
 
       <div class="input-box">
         <label>First Name:</label>
-        <input type="text" name="firstName" placeholder="Enter your first name" required>
+        <input id="first-name" type="text" name="firstName" placeholder="Enter your first name" required>
       </div>
 
       <div class="input-box">
         <label>Last Name:</label>
-        <input type="text" name="lastName" placeholder="Enter your last name" required>
+        <input id="last-name" type="text" name="lastName" placeholder="Enter your last name" required>
       </div>
 
       <div class="input-box">
         <label>Email:</label>
-        <input type="email" name="Email" placeholder="Enter your email" required>
+        <input id="email" type="email" name="Email" placeholder="Enter your email" required>
       </div>
 
       <div class="input-box">
         <label>Phone Number:</label>
-        <input type="tel" name="phoneNumber" placeholder="Enter your phone number (e.g., 0123456789)" required>
+        <input id="phone" type="tel" name="phoneNumber" placeholder="Enter your phone number (e.g., 0123456789)" required>
       </div>
 
 
       <div class="input-box">
         <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+        <input id="city" type="text" id="city" name="city" placeholder="Enter your city" required>
       </div>
 
       <div class="input-box">
         <label>Password:</label>
-        <input type="password" name="password" placeholder="Choose your password" required>
+        <input id="password" type="password" name="password" placeholder="Choose your password" required>
       </div>
 
       <div class="input-box">
         <label>Confirm Password:</label>
-        <input type="password" name="confirmPassword" placeholder="Enter your password again" required>
+        <input id="confirm-password" type="password" name="confirmPassword" placeholder="Enter your password again" required>
       </div>
 
       <div>
