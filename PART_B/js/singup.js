@@ -14,13 +14,13 @@ form.addEventListener("submit", (e) => {
   }
 
   const email = document.getElementById("email").value;
-  if (!email.includes('@')) {
+  if (!email.includes("@")) {
     alert("The email must be valid");
     e.preventDefault();
   }
 
   const phone = document.getElementById("phone").value;
-  if (!phone.startsWith('05') || !phone.length === 10) {
+  if (!phone.startsWith("05") || !phone.length === 10) {
     alert("The phone must be valid");
     e.preventDefault();
   }
@@ -30,7 +30,7 @@ form.addEventListener("submit", (e) => {
     alert("The city must contain more then three letters.");
     e.preventDefault();
   }
-  
+
   const pass = document.getElementById("password").value;
   if (pass.length < 8) {
     alert("password need to be at least 8 characters");
@@ -41,5 +41,16 @@ form.addEventListener("submit", (e) => {
   if (confirm !== pass) {
     alert("The passwords do not match.");
     e.preventDefault();
+  }
+});
+
+const show = document.getElementById("show");
+show.addEventListener("change", (e) => {
+  const pass = document.getElementById("password");
+  const value = e.target.checked;
+  if (value) {
+    pass.type = "text";
+  } else {
+    pass.type = "password";
   }
 });
