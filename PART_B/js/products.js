@@ -18,9 +18,11 @@ function showProducts(products) {
 
     const price = document.createElement("div");
     price.innerText = "Price: $" + product.price;
+    div.appendChild(price);
 
     const button = document.createElement("button");
     button.innerText = "Add to cart";
+    div.appendChild(button);
 
     container.appendChild(div);
   }
