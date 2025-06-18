@@ -28,12 +28,11 @@ function showProducts(products) {
     button.innerText = "Add to cart";
     button.onclick = function() {
       const cart = JSON.parse(localStorage.getItem(CART)) ?? [];
-      const productName = product.title;
-      if (cart.includes(productName)) {
+      if (cart.findIndex((p) => p.title === product.title) >= 0) {
         alert("Our products are unique, you can only purchase one item each.");
         return;
       }
-      cart.push(productName);
+      cart.push(product);
       localStorage.setItem(CART, JSON.stringify(cart));
     }
     div.appendChild(button);
