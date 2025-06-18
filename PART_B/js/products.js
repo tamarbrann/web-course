@@ -27,13 +27,21 @@ function showProducts(products) {
     const button = document.createElement("button");
     button.innerText = "Add to cart";
     button.onclick = function() {
-      const cart = JSON.parse(localStorage.getItem(CART)) ?? [];
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user?.email) {
+        alert('You need to be logged in to add to your cart.')
+        return
+      }
+      const all = JSON.parse(localStorage.getItem(CART)) ?? {};
+      const cart = all[user.email] ?? [];
+
       if (cart.findIndex((p) => p.title === product.title) >= 0) {
         alert("Our products are unique, you can only purchase one item each.");
         return;
       }
       cart.push(product);
-      localStorage.setItem(CART, JSON.stringify(cart));
+      all[user.email] = cart;
+      localStorage.setItem(CART, JSON.stringify(all));
     }
     div.appendChild(button);
 

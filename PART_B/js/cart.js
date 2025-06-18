@@ -1,6 +1,6 @@
 const CART = 'cart';
 
-function showProducts(products) {
+function showProducts(products, email) {
   const container = document.getElementById("products");
   container.innerHTML = "";
 
@@ -32,9 +32,11 @@ function showProducts(products) {
     const button = document.createElement("button");
     button.innerText = "Remove from cart";
     button.onclick = function() {
-      const cart = JSON.parse(localStorage.getItem(CART)) ?? [];
+      const all = JSON.parse(localStorage.getItem(CART)) ?? [];
+      const cart = all[email];
       const filtered = cart.filter((p) => p.title !== product.title);
-      localStorage.setItem(CART, JSON.stringify(filtered));
+      all[email] = filtered;
+      localStorage.setItem(CART, JSON.stringify(all));
       showProducts(filtered);
     }
     div.appendChild(button);
@@ -62,6 +64,14 @@ function showProducts(products) {
   container.appendChild(div)
 }
 
-const productsInCart =  JSON.parse(localStorage.getItem(CART)) ?? [];
-showProducts(productsInCart);
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (user?.email) {
+  const all = JSON.parse(localStorage.getItem(CART)) ?? [];
+  const cart = all[user.email] ?? [];
+  showProducts(cart, user.email);
+} else {
+  alert('You need to be logged in to view your cart.')
+  window.location.replace('Login.html')
+}
 

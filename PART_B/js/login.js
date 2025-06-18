@@ -11,4 +11,6 @@ form.addEventListener("submit", (e) => {
     alert("email need to include .com");
     e.preventDefault();
   }
+
+  localStorage.setItem("user", JSON.stringify({ email }));
 });
