@@ -206,3 +206,7 @@ footer {
 .terms-conditions {
   align-self: center;
 }
+
+#products button {
+  margin: 14px;
+}
