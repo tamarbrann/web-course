@@ -41,6 +41,25 @@ function showProducts(products) {
 
     container.appendChild(div);
   }
+
+  const div = document.createElement("div");
+
+  const label = document.createElement("label");
+  label.innerText = "Total to pay: "
+  div.appendChild(label);
+
+  const value = document.createElement("span")
+  value.innerText = "$" + products.reduce((acc, product) => acc + product.price, 0);
+  div.appendChild(value);
+
+  const payButton = document.createElement("button")
+  payButton.innerText = "Pay"
+  payButton.onclick = function() {
+    alert('We’re currently experiencing issues with our payment system. Please try again later. Thank you for your patience.');
+  }
+  div.appendChild(payButton);
+
+  container.appendChild(div)
 }
 
 const productsInCart =  JSON.parse(localStorage.getItem(CART)) ?? [];
