@@ -83,13 +83,13 @@ colorPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const color = e.target.value;
   if (color) {
-    const filterd = [];
+    const filtered = [];
     for (const p of allProducts) {
       if (p.color === color) {
-        filterd.push(p);
+        filtered.push(p);
       }
     }
-    showProducts(filterd);
+    showProducts(filtered);
   } else {
     showProducts(allProducts);
   }
@@ -100,13 +100,13 @@ sizePicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const size = e.target.value;
   if (size) {
-    const filterd = [];
+    const filtered = [];
     for (const p of allProducts) {
       if (p.size === size) {
-        filterd.push(p);
+        filtered.push(p);
       }
     }
-    showProducts(filterd);
+    showProducts(filtered);
   } else {
     showProducts(allProducts);
   }
@@ -117,13 +117,13 @@ genderPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const gender = e.target.value;
   if (gender) {
-    const filterd = [];
+    const filtered = [];
     for (const p of allProducts) {
       if (p.gender === gender) {
-        filterd.push(p);
+        filtered.push(p);
       }
     }
-    showProducts(filterd);
+    showProducts(filtered);
   } else {
     showProducts(allProducts);
   }
@@ -134,13 +134,13 @@ typePicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const type = e.target.value;
   if (type) {
-    const filterd = [];
+    const filtered = [];
     for (const p of allProducts) {
       if (p.type === type) {
-        filterd.push(p);
+        filtered.push(p);
       }
     }
-    showProducts(filterd);
+    showProducts(filtered);
   } else {
     showProducts(allProducts);
   }
@@ -151,13 +151,13 @@ conditionPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const condition = e.target.value;
   if (condition) {
-    const filterd = [];
+    const filtered = [];
     for (const p of allProducts) {
       if (p.condition === condition) {
-        filterd.push(p);
+        filtered.push(p);
       }
     }
-    showProducts(filterd);
+    showProducts(filtered);
   } else {
     showProducts(allProducts);
   }
