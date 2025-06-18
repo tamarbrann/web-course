@@ -1,4 +1,4 @@
-const CART = 'cart';
+const CARTS = 'carts';
 
 function showProducts(products, email) {
   const container = document.getElementById("products");
@@ -32,11 +32,11 @@ function showProducts(products, email) {
     const button = document.createElement("button");
     button.innerText = "Remove from cart";
     button.onclick = function() {
-      const all = JSON.parse(localStorage.getItem(CART)) ?? [];
+      const all = JSON.parse(localStorage.getItem(CARTS)) ?? [];
       const cart = all[email];
       const filtered = cart.filter((p) => p.title !== product.title);
       all[email] = filtered;
-      localStorage.setItem(CART, JSON.stringify(all));
+      localStorage.setItem(CARTS, JSON.stringify(all));
       showProducts(filtered);
     }
     div.appendChild(button);
@@ -67,7 +67,7 @@ function showProducts(products, email) {
 const user = JSON.parse(localStorage.getItem("user"));
 
 if (user?.email) {
-  const all = JSON.parse(localStorage.getItem(CART)) ?? [];
+  const all = JSON.parse(localStorage.getItem(CARTS)) ?? [];
   const cart = all[user.email] ?? [];
   showProducts(cart, user.email);
 } else {

@@ -1,4 +1,4 @@
-const CART = 'cart';
+const CARTS = 'carts';
 
 function showProducts(products) {
   const container = document.getElementById("products");
@@ -32,7 +32,7 @@ function showProducts(products) {
         alert('You need to be logged in to add to your cart.')
         return
       }
-      const all = JSON.parse(localStorage.getItem(CART)) ?? {};
+      const all = JSON.parse(localStorage.getItem(CARTS)) ?? {};
       const cart = all[user.email] ?? [];
 
       if (cart.findIndex((p) => p.title === product.title) >= 0) {
@@ -41,7 +41,7 @@ function showProducts(products) {
       }
       cart.push(product);
       all[user.email] = cart;
-      localStorage.setItem(CART, JSON.stringify(all));
+      localStorage.setItem(CARTS, JSON.stringify(all));
     }
     div.appendChild(button);
 
