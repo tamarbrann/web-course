@@ -4,6 +4,11 @@ function showProducts(products) {
   const container = document.getElementById("products");
   container.innerHTML = "";
 
+  if (!products.length) {
+    container.innerText = 'Cart is empty, you can add items to the cart in the shop'
+    return;
+  }
+
   for (const product of products) {
     const div = document.createElement("div");
 
