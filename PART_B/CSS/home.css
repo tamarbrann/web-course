@@ -1,0 +1,212 @@
+/* Defining global variables */
+:root {
+  --primary-color: #CFE1B9;
+  --accent-color: #E8D8C4;
+  --background-color: #D4E5F4;
+  --text-color: #2C3E50;
+  --font-family: 'Winky Sans', sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* General design */
+body {
+  margin: 0;
+  padding-inline: 0;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.body-container {
+  padding-block: 10px;
+  max-width: 800px;
+  margin-inline: auto;
+  margin-bottom: auto;
+}
+
+/* Header design */
+header {
+  background-color: var(--primary-color);
+  padding: 20px;
+  display: flex;
+  /*The logo will be on the left and the categories on the right*/
+  justify-content: space-between;
+  align-items: center;
+  /*Centers the items vertically*/
+}
+
+
+/* Center everything that comes after the header */
+header+* {
+  text-align: center;
+}
+
+/* מרכז תמונה גדולה
+  header + * img {
+    display: block;
+    margin: 0 auto;
+  }
+   */
+.main-image {
+  max-width: 100%;
+}
+
+/* Design for navigation categories */
+.navigation a:link,
+.navigation a:visited {
+  display: inline-block;
+  /* To enable padding and transform */
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--text-color);
+  /* Text color you set in root */
+  background-color: var(--primary-color);
+  /* Background color for the button */
+  border-radius: 8px;
+  /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Smooth transition */
+}
+
+.navigation a:hover {
+  background-color: var(--accent-color);
+  /* Change background color */
+  color: var(--text-color);
+  /* Text color remains the same */
+  transform: scale(1.1);
+  /* Zoom in */
+}
+
+
+/* Button for the Discover Our Collection link */
+.discover-button:link,
+.discover-button:visited {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-decoration: none;
+  background-color: var(--primary-color);
+  /* Default background color is green */
+  border: 2px solid var(--primary-color);
+  /* Frame in the same green color */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.discover-button:hover {
+  background-color: var(--accent-color);
+  /*  hover - the background changes to a different color */
+  color: var(--text-color);
+  transform: scale(1.1);
+}
+
+/* Network logo design */
+.social-links a {
+  display: inline-flex;
+  /*Align the icons in the center*/
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: var(--text-color);
+  /* Icon color */
+}
+
+.social-links a:hover {
+  background-color: var(--primary-color);
+  /* When the mouse moves, the background changes */
+  transform: scale(1.1);
+}
+
+.social-links i {
+  font-size: 24px;
+}
+
+/*Link design*/
+.footer-link:link,
+.footer-link:visited {
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--accent-color);
+}
+
+footer {
+  background-color: var(--primary-color);
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+}
+
+
+/* Design and animation of the clothing categories*/
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.categories img {
+  display: inline-block;
+  margin: 10px;
+  width: 150px;
+  opacity: 0;
+  animation: fadeInSlide 1s forwards;
+}
+
+.categories a {
+  text-decoration: none;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .input-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+}
+
+.terms-conditions {
+  align-self: center;
+}
+
+#products button {
+  margin: 14px;
+}
