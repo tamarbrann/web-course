@@ -2,109 +2,109 @@ import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
+import db from "./db.js";
+import {
+  createUser,
+  loginUser,
+  getAllProducts,
+  addToCart,
+  getCartByEmail,
+  removeFromCart
+} from "./CRUD_functions.js";
 
-const _dirname = dirname (fileURLToPath (import.meta.url)) ;
+const _dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
+app.use(express.json());
 const port = 8080;
 var firstName = "";
 
-app.listen(port, () => {
-  console.log(`Server is running on port${port}`);
+// מחובר למסד נתונים דרך db.js
+const connection = db;
+
+// מחשב סכום כולל של הסל לפי אימייל
+app.get("/api/cart/total", (req, res) => {
+  const { email } = req.query;
+  if (!email) return res.status(400).send("Email is required");
+
+  const query = `
+    SELECT SUM(p.price * c.quantity) AS total
+    FROM cart c
+    JOIN products p ON c.product_id = p.id
+    WHERE c.user_email = ?
+  `;
+  connection.query(query, [email], (err, results) => {
+    if (err) {
+      console.error("Error calculating total:", err);
+      return res.status(500).send("Error calculating total");
+    }
+    res.json({ total: results[0].total ?? 0 });
+  });
 });
 
-app.use(express.static(path.join(_dirname, '../PART_B')));
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+app.use(express.static(path.join(_dirname, "../PART_B")));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-// טוען את עמוד הבית
-app.get('/', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/Home.html' )
-  res.sendFile(indexPath);
+// עמוד הבית
+app.get("/", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/Home.html"));
 });
 
-//העמודים האחרים
-app.get('/AboutUs', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/AboutUs.html' )
-  res.sendFile(indexPath);
-});
-app.get('/Products', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/Products.html' )
-  res.sendFile(indexPath);
+// שאר הדפים
+app.get("/AboutUs", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/AboutUs.html"));
 });
 
-
-app.get('/Cart', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/Cart.html' )
-  res.sendFile(indexPath);
+app.get("/Products", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/Products.html"));
 });
 
-app.post('/cart', (req, res) => {
+app.get("/Cart", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/Cart.html"));
+});
+
+app.post("/cart", (req, res) => {
   const { cartSummary } = req.body;
   console.log("Cart saved:", cartSummary);
-  res.send(`<h2>Your cart was saved successfully!</h2><p>${cartSummary}👶🌱</p>`);
+  res.send(`<h2>Your cart was saved successfully!</h2><p>${cartSummary}</p>`);
 });
 
-
-app.get('/ContactUS', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/ContactUS.html' )
-  res.sendFile(indexPath);
+app.get("/ContactUS", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/ContactUS.html"));
 });
 
-
-app.get('/Login', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/Login.html' )
-  res.sendFile(indexPath);
+app.get("/Login", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/Login.html"));
 });
 
-function EmailGenerator(req, res, next) {
-  const { email, password } = req.body;
-  console.log(" Login attempt:", email);
-  req.email = email + password; // שומר ל־req
-  next(); // ממשיכים ל־route הבא
-}
-// Route שמופעל אחרי ה־middleware
-app.post("/login", EmailGenerator, (req, res) => {
-  res.send(`<h1>Thank you! Your email name is:</h1><h2>${req.email}</h2>`);
+app.get("/Profile", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/Profile.html"));
 });
 
-
-app.get('/SingUp', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/SingUp.html' )
-  res.sendFile(indexPath);
+app.get("/ForgetPassword", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/ForgetPassword.html"));
 });
 
-function SignUpGenerator(req, res, next) {
-  const { firstName,lastName,email,phoneNumber,city,password } = req.body;
-  console.log(" SingUp attempt:", firstName);
-  req.firstName = firstName; // שומר ל־req
-  next(); // ממשיכים ל־route הבא
-}
-
-// Route שמופעל אחרי ה־middleware
-app.post("/singup", SignUpGenerator, (req, res) => {
-  res.send(`<h1>Hello ${req.firstName}!Welcome to the New Era Family,</h1>
-    <h2>You've taken the first step toward sustainable baby fashion 👶🌱</h2>
-    <h3>We're excited to have you with us.</h3>`);
+app.get("/PrivacyPolicy", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/PrivacyPolicy.html"));
 });
 
-
-app.get('/Profile', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/Profile.html' )
-  res.sendFile(indexPath);
-});
-app.get('/ForgetPassword', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/ForgetPassword.html' )
-  res.sendFile(indexPath);
-});
-app.get('/PrivacyPolicy', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/PrivacyPolicy.html' )
-  res.sendFile(indexPath);
-});
-app.get('/TermsOfService', (req, res) => {
-  const indexPath = path.join(_dirname,'../PART_B/TermsOfService.html' )
-  res.sendFile(indexPath);
+app.get("/TermsOfService", (req, res) => {
+  res.sendFile(path.join(_dirname, "../PART_B/TermsOfService.html"));
 });
 
+// API Routes
+app.post("/singup", createUser);
+app.post("/login", loginUser);
+app.get("/api/products", getAllProducts);
+app.post("/api/cart", addToCart);
+app.get("/api/cart", getCartByEmail);
+app.post("/api/cart/remove", removeFromCart);
+
+// דף 404
 app.use((req, res) => {
   res.status(404).send("Sorry, page not found");
 });

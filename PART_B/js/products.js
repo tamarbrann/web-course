@@ -26,23 +26,32 @@ function showProducts(products) {
 
     const button = document.createElement("button");
     button.innerText = "Add to cart";
-    button.onclick = function() {
+    button.onclick = function () {
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user?.email) {
-        alert('You need to be logged in to add to your cart.')
-        return
-      }
-      const all = JSON.parse(localStorage.getItem(CARTS)) ?? {};
-      const cart = all[user.email] ?? [];
-
-      if (cart.findIndex((p) => p.title === product.title) >= 0) {
-        alert("Our products are unique, you can only purchase one item each.");
+        alert('You need to be logged in to add to your cart.');
         return;
       }
-      cart.push(product);
-      all[user.email] = cart;
-      localStorage.setItem(CARTS, JSON.stringify(all));
-    }
+
+      fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_email: user.email,
+          product_id: product.id,
+        }),
+      })
+        .then(res => {
+          if (!res.ok) throw new Error("Failed to add to cart");
+          return res.text();
+        })
+        .then(message => {
+          alert(message);
+        })
+        .catch(err => {
+          alert("There was an error: " + err.message);
+        });
+    };
     div.appendChild(button);
 
     container.appendChild(div);
@@ -58,114 +67,57 @@ function resetOtherFilters(el) {
   }
 }
 
-const allProducts = [
-  {
-    title: "Blue Baby Overalls",
-    desc: "Organic cotton, second hand, excellent condition.",
-    price: 10,
-    img: "picture/overalls.png",
-    color: "blue",
-    size: "0-3",
-    gender: "boys",
-    type: "overalls",
-    condition: "first-hand",
-  },
-  {
-    title: "Baby Dress",
-    desc: "Eco-friendly materials, first hand.",
-    price: 15,
-    img: "picture/dress.png",
-    color: "green",
-    size: "6-12",
-    gender: "girls",
-    type: "dresses",
-    condition: "second-hand",
-  },
-];
+let allProducts = [];
 
-showProducts(allProducts);
+fetch("/api/products")
+  .then(res => res.json())
+  .then(data => {
+    allProducts = data.map(p => ({
+      id: p.id,
+      title: p.name,
+      desc: p.description,
+      price: Number(p.price),
+      img: p.image_url,
+      color: p.color,
+      size: p.size,
+      gender: p.gender,
+      type: p.type,
+      condition: p.condition,
+    }));
+    showProducts(allProducts);
+  });
 
 const colorPicker = document.getElementById("color");
 colorPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const color = e.target.value;
-  if (color) {
-    const filtered = [];
-    for (const p of allProducts) {
-      if (p.color === color) {
-        filtered.push(p);
-      }
-    }
-    showProducts(filtered);
-  } else {
-    showProducts(allProducts);
-  }
+  showProducts(color ? allProducts.filter(p => p.color === color) : allProducts);
 });
 
 const sizePicker = document.getElementById("size");
 sizePicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const size = e.target.value;
-  if (size) {
-    const filtered = [];
-    for (const p of allProducts) {
-      if (p.size === size) {
-        filtered.push(p);
-      }
-    }
-    showProducts(filtered);
-  } else {
-    showProducts(allProducts);
-  }
+  showProducts(size ? allProducts.filter(p => p.size === size) : allProducts);
 });
 
 const genderPicker = document.getElementById("gender");
 genderPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const gender = e.target.value;
-  if (gender) {
-    const filtered = [];
-    for (const p of allProducts) {
-      if (p.gender === gender) {
-        filtered.push(p);
-      }
-    }
-    showProducts(filtered);
-  } else {
-    showProducts(allProducts);
-  }
+  showProducts(gender ? allProducts.filter(p => p.gender === gender) : allProducts);
 });
 
 const typePicker = document.getElementById("type");
 typePicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const type = e.target.value;
-  if (type) {
-    const filtered = [];
-    for (const p of allProducts) {
-      if (p.type === type) {
-        filtered.push(p);
-      }
-    }
-    showProducts(filtered);
-  } else {
-    showProducts(allProducts);
-  }
+  showProducts(type ? allProducts.filter(p => p.type === type) : allProducts);
 });
 
 const conditionPicker = document.getElementById("condition");
 conditionPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
   const condition = e.target.value;
-  if (condition) {
-    const filtered = [];
-    for (const p of allProducts) {
-      if (p.condition === condition) {
-        filtered.push(p);
-      }
-    }
-    showProducts(filtered);
-  } else {
-    showProducts(allProducts);
-  }
+  showProducts(condition ? allProducts.filter(p => p.condition === condition) : allProducts);
 });
