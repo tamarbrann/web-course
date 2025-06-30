@@ -1,5 +1,6 @@
 const CARTS = 'carts';
 
+// Displays product list on the page
 function showProducts(products) {
   const container = document.getElementById("products");
   container.innerHTML = "";
@@ -24,15 +25,18 @@ function showProducts(products) {
     price.innerText = "Price: $" + product.price;
     div.appendChild(price);
 
+    // Create "Add to cart" button
     const button = document.createElement("button");
     button.innerText = "Add to cart";
     button.onclick = function () {
+      // Check if user is logged in
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user?.email) {
         alert('You need to be logged in to add to your cart.');
         return;
       }
 
+      // Send product to backend cart API
       fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -58,6 +62,7 @@ function showProducts(products) {
   }
 }
 
+// Resets other filter dropdowns when one is selected
 function resetOtherFilters(el) {
   const selects = document.getElementsByTagName("select");
   for (const select of selects) {
@@ -69,9 +74,11 @@ function resetOtherFilters(el) {
 
 let allProducts = [];
 
+// Fetch all products from backend and display them
 fetch("/api/products")
   .then(res => res.json())
   .then(data => {
+    // Transform product data to desired format
     allProducts = data.map(p => ({
       id: p.id,
       title: p.name,
@@ -84,9 +91,10 @@ fetch("/api/products")
       type: p.type,
       condition: p.condition,
     }));
-    showProducts(allProducts);
+    showProducts(allProducts); // Initially show all products
   });
 
+// Filter by color
 const colorPicker = document.getElementById("color");
 colorPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
@@ -94,6 +102,7 @@ colorPicker.addEventListener("change", (e) => {
   showProducts(color ? allProducts.filter(p => p.color === color) : allProducts);
 });
 
+// Filter by size
 const sizePicker = document.getElementById("size");
 sizePicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
@@ -101,6 +110,7 @@ sizePicker.addEventListener("change", (e) => {
   showProducts(size ? allProducts.filter(p => p.size === size) : allProducts);
 });
 
+// Filter by gender
 const genderPicker = document.getElementById("gender");
 genderPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
@@ -108,6 +118,7 @@ genderPicker.addEventListener("change", (e) => {
   showProducts(gender ? allProducts.filter(p => p.gender === gender) : allProducts);
 });
 
+// Filter by type
 const typePicker = document.getElementById("type");
 typePicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);
@@ -115,6 +126,7 @@ typePicker.addEventListener("change", (e) => {
   showProducts(type ? allProducts.filter(p => p.type === type) : allProducts);
 });
 
+// Filter by condition 
 const conditionPicker = document.getElementById("condition");
 conditionPicker.addEventListener("change", (e) => {
   resetOtherFilters(e.target);

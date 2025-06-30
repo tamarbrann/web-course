@@ -1,12 +1,12 @@
-
-
 import db from "./db.js";
 
-export function createUser (req, res) {
+// Create a new user and insert into the database
+export function createUser(req, res) {
   if (!req.body) {
     return res.status(400).send({ message: "Request body cannot be empty!" });
   }
 
+  // Construct user object from request
   const user = {
     first_name: req.body.firstName,
     last_name: req.body.lastName,
@@ -16,21 +16,23 @@ export function createUser (req, res) {
     password: req.body.password
   };
 
+  // Insert user into 'users' table
   db.query("INSERT INTO users SET ?", user, (err, result) => {
     if (err) {
       console.error("Error inserting user:", err);
       return res.status(500).send("Error registering user.");
     }
 
-
+    // Welcome message sent as HTML
     res.send(`
       <h1>Hello ${user.first_name}! Welcome to the New Era Family,</h1>
       <h2>You've taken the first step toward sustainable baby fashion</h2>
       <h3>We're excited to have you with us.</h3>
     `);
   });
-};
+}
 
+// Handle user login
 export function loginUser(req, res) {
   const { email, password } = req.body;
 
@@ -38,6 +40,7 @@ export function loginUser(req, res) {
     return res.status(400).send("Missing email or password.");
   }
 
+  // Look up user by email
   db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
     if (err) {
       console.error("Error during login:", err);
@@ -50,16 +53,18 @@ export function loginUser(req, res) {
 
     const user = results[0];
 
+    // Check if passwords match (note: not secure without hashing)
     if (user.password !== password) {
       return res.status(401).send("Incorrect password.");
     }
 
+    // Redirect to profile page upon successful login
     res.redirect("/Profile");
   });
 }
 
-
-export function getAllUsers (req, res) {
+// Return all users from the database
+export function getAllUsers(req, res) {
   db.query("SELECT * FROM users", (err, result) => {
     if (err) {
       res.status(500).send("Error retrieving users: " + err);
@@ -67,8 +72,9 @@ export function getAllUsers (req, res) {
     }
     res.send(result);
   });
-};
+}
 
+// Return all products from the database
 export function getAllProducts(req, res) {
   db.query("SELECT * FROM products", (err, result) => {
     if (err) {
@@ -76,11 +82,11 @@ export function getAllProducts(req, res) {
       res.status(500).send("Error fetching products from database.");
       return;
     }
-    res.json(result); 
+    res.json(result);
   });
 }
 
-
+// Find specific user by email
 export function findUserByEmail(req, res) {
   const email = req.query.email;
   db.query("SELECT * FROM users WHERE email = ?", [email], (err, result) => {
@@ -90,9 +96,9 @@ export function findUserByEmail(req, res) {
     }
     res.send(result);
   });
-};
+}
 
-
+// Add product to the cart
 export function addToCart(req, res) {
   const { user_email, product_id } = req.body;
 
@@ -106,6 +112,7 @@ export function addToCart(req, res) {
   });
 }
 
+// Retrieve all products in a user's cart
 export function getCartByEmail(req, res) {
   const email = req.query.email;
   if (!email) return res.status(400).send("Missing email");
@@ -126,6 +133,7 @@ export function getCartByEmail(req, res) {
   );
 }
 
+// Remove a specific product from the user's cart
 export function removeFromCart(req, res) {
   const { user_email, product_id } = req.body;
 
@@ -143,11 +151,3 @@ export function removeFromCart(req, res) {
     res.send("Item removed from cart successfully");
   });
 }
-
-
-
-
-
-
-
-

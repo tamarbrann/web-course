@@ -1,12 +1,15 @@
+// Renders products in the cart page
 function showProducts(products, email) {
   const container = document.getElementById("products");
   container.innerHTML = "";
 
+  // If cart is empty, show message and exit
   if (!products.length) {
     container.innerText = 'Cart is empty, you can add items to the cart in the shop.';
     return;
   }
 
+  // Loop through products and render them in the cart
   for (const product of products) {
     const div = document.createElement("div");
 
@@ -27,9 +30,11 @@ function showProducts(products, email) {
     price.innerText = "Price: $" + product.price;
     div.appendChild(price);
 
+    // Create "Remove from cart" button
     const button = document.createElement("button");
     button.innerText = "Remove from cart";
     button.onclick = function () {
+      // Send request to backend to remove item from cart
       fetch("/api/cart/remove", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +48,7 @@ function showProducts(products, email) {
           return res.text();
         })
         .then(() => {
-          location.reload(); // Reload to update cart
+          location.reload(); // Reload the page to refresh cart view
         })
         .catch(err => {
           alert("There was an error: " + err.message);
@@ -54,6 +59,7 @@ function showProducts(products, email) {
     container.appendChild(div);
   }
 
+  // Create cart summary section
   const summary = document.createElement("div");
 
   const label = document.createElement("label");
@@ -61,9 +67,10 @@ function showProducts(products, email) {
   summary.appendChild(label);
 
   const value = document.createElement("span");
-  value.id = "total-value"; // חשוב לזיהוי!
+  value.id = "total-value"; // ID used to update total later
   summary.appendChild(value);
 
+  // Fetch total cart value from backend
   fetch("/api/cart/total?email=" + email)
     .then(res => res.json())
     .then(({ total }) => {
@@ -74,6 +81,7 @@ function showProducts(products, email) {
       value.innerText = "N/A";
     });
 
+  // Simulated "Pay" button
   const payButton = document.createElement("button");
   payButton.innerText = "Pay";
   payButton.onclick = function () {
@@ -84,9 +92,11 @@ function showProducts(products, email) {
   container.appendChild(summary);
 }
 
+// Get logged-in user from localStorage
 const user = JSON.parse(localStorage.getItem("user"));
 
 if (user?.email) {
+  // If logged in, fetch user's cart from server
   fetch("/api/cart?email=" + user.email)
     .then(res => res.json())
     .then(data => {
@@ -97,6 +107,7 @@ if (user?.email) {
       alert("There was an error loading your cart.");
     });
 } else {
+  // Redirect to login page if not logged in
   alert("You need to be logged in to view your cart.");
   window.location.replace("Login.html");
 }
