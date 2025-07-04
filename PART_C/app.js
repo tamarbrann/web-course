@@ -67,13 +67,6 @@ app.get("/Cart", (req, res) => {
   res.sendFile(path.join(_dirname, "../PART_B/Cart.html"));
 });
 
-// Endpoint to simulate saving the cart (used for demonstration)
-app.post("/cart", (req, res) => {
-  const { cartSummary } = req.body;
-  console.log("Cart saved:", cartSummary);
-  res.send(`<h2>Your cart was saved successfully!</h2><p>${cartSummary}</p>`);
-});
-
 app.get("/ContactUS", (req, res) => {
   res.sendFile(path.join(_dirname, "../PART_B/ContactUS.html"));
 });
