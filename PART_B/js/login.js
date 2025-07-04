@@ -7,8 +7,8 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
   }
   const email = document.getElementById("email").value;
-  if (!email.includes('.com')) {
-    alert("email need to include .com");
+  if (!email.includes('.')) {
+    alert("email need to include .");
     e.preventDefault();
   }
 
