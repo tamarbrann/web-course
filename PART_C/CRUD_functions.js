@@ -22,13 +22,8 @@ export function createUser(req, res) {
       console.error("Error inserting user:", err);
       return res.status(500).send("Error registering user.");
     }
-
-    // Welcome message sent as HTML
-    res.send(`
-      <h1>Hello ${user.first_name}! Welcome to the New Era Family,</h1>
-      <h2>You've taken the first step toward sustainable baby fashion</h2>
-      <h3>We're excited to have you with us.</h3>
-    `);
+    res.cookie('userEmail', user.email);
+    res.redirect("/Profile");
   });
 }
 
@@ -57,7 +52,8 @@ export function loginUser(req, res) {
     if (user.password !== password) {
       return res.status(401).send("Incorrect password.");
     }
-
+    
+    res.cookie('userEmail', user.email);
     // Redirect to profile page upon successful login
     res.redirect("/Profile");
   });
