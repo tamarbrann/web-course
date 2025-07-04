@@ -30,8 +30,8 @@ function showProducts(products) {
     button.innerText = "Add to cart";
     button.onclick = function () {
       // Check if user is logged in
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user?.email) {
+      const email = getUserEmail();;
+      if (!email) {
         alert('You need to be logged in to add to your cart.');
         return;
       }
@@ -41,7 +41,7 @@ function showProducts(products) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_email: user.email,
+          user_email: email,
           product_id: product.id,
         }),
       })

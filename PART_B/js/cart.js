@@ -92,15 +92,14 @@ function showProducts(products, email) {
   container.appendChild(summary);
 }
 
-// Get logged-in user from localStorage
-const user = JSON.parse(localStorage.getItem("user"));
+const userEmail = getUserEmail();
 
-if (user?.email) {
+if (userEmail) {
   // If logged in, fetch user's cart from server
-  fetch("/api/cart?email=" + user.email)
+  fetch("/api/cart?email=" + userEmail)
     .then(res => res.json())
     .then(data => {
-      showProducts(data, user.email);
+      showProducts(data, userEmail);
     })
     .catch(err => {
       console.error("Error fetching cart:", err);
